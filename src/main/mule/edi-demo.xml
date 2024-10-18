@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="63d97e1f-c9f2-473f-9550-dc3fdf2a13aa" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<hl7:config name="HL7_EDI_Config" doc:name="HL7 EDI Config" doc:id="a85df819-4e9c-419b-ad4d-8c2e2a9d4278" >
+		<hl7:schemas >
+			<hl7:schema value="/hl7lax/v2_1/ORM_O01.esl" />
+		</hl7:schemas>
+	</hl7:config>
+	<flow name="edi-demoFlow" doc:id="8887bd18-eedc-4194-8255-15e1d6d53263" >
+		<http:listener doc:name="Listener" doc:id="004675d4-3bfb-4238-8c95-124b74de0b07" config-ref="HTTP_Listener_config" path="/demo"/>
+		<logger level="INFO" doc:name="Logger" doc:id="b7020ab7-0b74-4b16-8aa4-c86302aa581e" message='#["Welcome to Goa singham"]'/>
+	</flow>
+</mule>
